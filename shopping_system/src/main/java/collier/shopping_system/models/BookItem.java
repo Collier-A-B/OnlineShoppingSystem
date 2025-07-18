@@ -1,15 +1,17 @@
 package collier.shopping_system.models;
 
-import collier.shopping_system.custom_exceptions.InvalidIsbnException;
+import collier.shopping_system.custom_exceptions.book_exceptions.EmptyAuthorException;
+import collier.shopping_system.custom_exceptions.book_exceptions.EmptyTitleException;
+import collier.shopping_system.custom_exceptions.book_exceptions.InvalidIsbnException;
 
 public class BookItem extends InventoryItem{
     private final int bookId;
     private String bookIsbn;
     private String bookTitle;
     private String bookAuthor;
-    public BookItem(int itemId, String itemIdString, int inventoryStock, double itemPrice, String itemDescription,
+    public BookItem(int itemId, int inventoryStock, double itemPrice, String itemDescription,
             int bookId, String bookIsbn, String bookTitle, String bookAuthor) {
-        super(itemId, itemIdString, inventoryStock, itemPrice, itemDescription);
+        super(itemId, inventoryStock, itemPrice, itemDescription);
         this.bookId = bookId;
         this.bookIsbn = bookIsbn;
         this.bookTitle = bookTitle;
@@ -21,28 +23,55 @@ public class BookItem extends InventoryItem{
     public String getBookIsbn() {
         return bookIsbn;
     }
-    public void setBookIsbn(String bookIsbn) {
+    public boolean setBookIsbn(String bookIsbn) {
         try {
             if(!validateIsbn(bookIsbn))
                 throw new InvalidIsbnException();
+            this.bookIsbn = bookIsbn;
         } catch (InvalidIsbnException e) {
             System.err.println(e.getMessage());
+            return false;
         }
+        return true;
     }
     public String getBookTitle() {
         return bookTitle;
     }
-    public void setBookTitle(String bookTitle) {
-        this.bookTitle = bookTitle;
+    public boolean setBookTitle(String bookTitle) {
+        try {
+            if (bookTitle.isEmpty())
+                throw new EmptyTitleException();
+            this.bookTitle = bookTitle;
+        } catch (EmptyTitleException e) {
+            System.err.println(e.getMessage());
+            return false;
+        }
+        return true;
     }
     public String getBookAuthor() {
         return bookAuthor;
     }
-    public void setBookAuthor(String bookAuthor) {
-        this.bookAuthor = bookAuthor;
+    public boolean setBookAuthor(String bookAuthor) {
+        try {
+            if (bookAuthor.isEmpty())
+                throw new EmptyAuthorException();
+            this.bookAuthor = bookAuthor;
+        } catch (EmptyAuthorException e) {
+            System.err.println(e.getMessage());
+            return false;
+        }
+        return true;
     }
 
     private boolean validateIsbn(String isbn) {
         return isbn.length() == 13 && isbn.matches("\\d{13}");
+    }
+
+    @Override
+    public String toString() {
+        String retString = super.toString() + String.format("""
+            \nbookIsbn: %s, bookTitle: %s, bookAuthor: %s
+            """, this.bookIsbn, this.bookTitle, this.bookAuthor);
+        return retString;
     }
 }
