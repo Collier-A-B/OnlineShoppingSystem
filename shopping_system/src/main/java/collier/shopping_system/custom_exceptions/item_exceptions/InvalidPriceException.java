@@ -4,6 +4,6 @@ import collier.shopping_system.custom_exceptions.InvalidInputException;
 
 public final class InvalidPriceException extends InvalidInputException{
     public InvalidPriceException() {
-        super("Item price must be greater than zero");
+        super("Item price must be greater than or equal to zero");
     }
 }

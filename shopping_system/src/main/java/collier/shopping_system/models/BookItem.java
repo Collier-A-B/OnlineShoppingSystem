@@ -3,12 +3,29 @@ package collier.shopping_system.models;
 import collier.shopping_system.custom_exceptions.book_exceptions.EmptyAuthorException;
 import collier.shopping_system.custom_exceptions.book_exceptions.EmptyTitleException;
 import collier.shopping_system.custom_exceptions.book_exceptions.InvalidIsbnException;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Size;
 
+@Entity
 public class BookItem extends InventoryItem{
+    @Id
+    @GeneratedValue(strategy=GenerationType.AUTO)
     private final int bookId;
+
+    @NotBlank
+    @Size(min=13, max=13)
     private String bookIsbn;
+
+    @NotBlank
     private String bookTitle;
+
+    @NotBlank
     private String bookAuthor;
+
     public BookItem(int itemId, int inventoryStock, double itemPrice, String itemDescription,
             int bookId, String bookIsbn, String bookTitle, String bookAuthor) {
         super(itemId, inventoryStock, itemPrice, itemDescription);

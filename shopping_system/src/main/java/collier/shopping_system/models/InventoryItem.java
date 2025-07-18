@@ -3,11 +3,29 @@ package collier.shopping_system.models;
 import collier.shopping_system.custom_exceptions.item_exceptions.EmptyDescriptionException;
 import collier.shopping_system.custom_exceptions.item_exceptions.InvalidPriceException;
 import collier.shopping_system.custom_exceptions.item_exceptions.NegativeStockException;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.Inheritance;
+import jakarta.persistence.InheritanceType;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Size;
 
+@Entity
+@Inheritance(strategy = InheritanceType.JOINED)
 public abstract class InventoryItem {
+    @Id
+    @GeneratedValue(strategy=GenerationType.AUTO)
     private final int itemId; // PK of this value in DB
+
+    @Size(min=0)
     private int itemStock; // total number of a given item in stock (>=0)
+
+    @Size(min=0)
     private double itemPrice; // price of an item per unit
+
+    @NotBlank
     private String itemDescription; // description of the item
 
     protected InventoryItem(int itemId, int inventoryStock, double itemPrice,
@@ -45,7 +63,7 @@ public abstract class InventoryItem {
 
     public boolean setItemPrice(double itemPrice) {
         try {
-            if (itemPrice <= 0) {
+            if (itemPrice < 0) {
                 throw new InvalidPriceException();
             }
             this.itemPrice = itemPrice;
