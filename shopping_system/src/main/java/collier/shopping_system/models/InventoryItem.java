@@ -37,11 +37,11 @@ public abstract class InventoryItem {
     }
 
     public int getItemId() {
-        return itemId;
+        return this.itemId;
     }
 
     public int getItemStock() {
-        return itemStock;
+        return this.itemStock;
     }
 
     public boolean setItemStock(int inventoryStock) {
@@ -58,7 +58,7 @@ public abstract class InventoryItem {
     }
 
     public double getItemPrice() {
-        return itemPrice;
+        return this.itemPrice;
     }
 
     public boolean setItemPrice(double itemPrice) {
@@ -75,7 +75,7 @@ public abstract class InventoryItem {
     }
 
     public String getItemDescription() {
-        return itemDescription;
+        return this.itemDescription;
     }
 
     public boolean setItemDescription(String itemDescription) {
