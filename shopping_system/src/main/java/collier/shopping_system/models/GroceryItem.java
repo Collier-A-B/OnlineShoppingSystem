@@ -17,7 +17,7 @@ public class GroceryItem extends InventoryItem {
     @NotBlank
     private String groceryCategory;
 
-    public GroceryItem(int itemId, int inventoryStock, double itemPrice, String itemDescription, int groceryId,
+    public GroceryItem(int itemId, int inventoryStock, double itemPrice, String itemDescription,
             @NotBlank Date sellByDate, @NotBlank Date expirDate, @NotBlank String groceryCategory) {
         super(itemId, inventoryStock, itemPrice, itemDescription);
         this.sellByDate = sellByDate;

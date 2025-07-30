@@ -21,7 +21,7 @@ public class BookItem extends InventoryItem{
     private String bookAuthor;
 
     public BookItem(int itemId, int inventoryStock, double itemPrice, String itemDescription,
-            int bookId, String bookIsbn, String bookTitle, String bookAuthor) {
+            String bookIsbn, String bookTitle, String bookAuthor) {
         super(itemId, inventoryStock, itemPrice, itemDescription);
         this.bookIsbn = bookIsbn;
         this.bookTitle = bookTitle;

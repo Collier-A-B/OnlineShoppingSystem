@@ -9,8 +9,8 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Inheritance;
 import jakarta.persistence.InheritanceType;
+import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.Size;
 
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)
@@ -19,10 +19,10 @@ public abstract class InventoryItem {
     @GeneratedValue(strategy=GenerationType.AUTO)
     private final int itemId; // PK of this value in DB
 
-    @Size(min=0)
+    @Min(value = 0)
     private int itemStock; // total number of a given item in stock (>=0)
 
-    @Size(min=0)
+    @Min(value = 0)
     private double itemPrice; // price of an item per unit
 
     @NotBlank
