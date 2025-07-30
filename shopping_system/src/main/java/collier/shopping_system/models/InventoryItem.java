@@ -93,8 +93,7 @@ public abstract class InventoryItem {
     @Override
     public String toString() {
         String retString = String.format("""
-                Id: %s, Avaliable Stock: $d, Price per Unit: %d
-                Description: "%s"
+                Id: %s, Avaliable Stock: $d, Price per Unit: %d, Description: "%s"
                 """, this.itemId, this.itemStock, this.itemPrice, this.itemDescription);
         return retString;
     }

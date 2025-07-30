@@ -3,16 +3,10 @@ package collier.shopping_system.models;
 import java.sql.Date;
 
 import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
 import jakarta.validation.constraints.NotBlank;
 
 @Entity
 public class GroceryItem extends InventoryItem {
-    @Id
-    @GeneratedValue(strategy=GenerationType.AUTO)
-    private final int groceryId;
 
     @NotBlank
     private Date sellByDate;
@@ -26,14 +20,9 @@ public class GroceryItem extends InventoryItem {
     public GroceryItem(int itemId, int inventoryStock, double itemPrice, String itemDescription, int groceryId,
             @NotBlank Date sellByDate, @NotBlank Date expirDate, @NotBlank String groceryCategory) {
         super(itemId, inventoryStock, itemPrice, itemDescription);
-        this.groceryId = groceryId;
         this.sellByDate = sellByDate;
         this.expirDate = expirDate;
         this.groceryCategory = groceryCategory;
-    }
-
-    public int getGroceryId() {
-        return this.groceryId;
     }
 
     public Date getSellByDate() {
@@ -80,5 +69,13 @@ public class GroceryItem extends InventoryItem {
         
     }
 
+    @Override
+    public String toString() {
+        return super.toString() + String.format("""
+                \ngrocerySellBy: %s, groceryExpir: %s, groceryCategory: %s
+                """, this.sellByDate, this.expirDate, this.groceryCategory);
+    }
+
+    
     
 }

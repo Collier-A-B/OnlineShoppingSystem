@@ -4,17 +4,11 @@ import collier.shopping_system.custom_exceptions.book_exceptions.EmptyAuthorExce
 import collier.shopping_system.custom_exceptions.book_exceptions.EmptyTitleException;
 import collier.shopping_system.custom_exceptions.book_exceptions.InvalidIsbnException;
 import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 
 @Entity
 public class BookItem extends InventoryItem{
-    @Id
-    @GeneratedValue(strategy=GenerationType.AUTO)
-    private final int bookId;
 
     @NotBlank
     @Size(min=13, max=13)
@@ -29,13 +23,9 @@ public class BookItem extends InventoryItem{
     public BookItem(int itemId, int inventoryStock, double itemPrice, String itemDescription,
             int bookId, String bookIsbn, String bookTitle, String bookAuthor) {
         super(itemId, inventoryStock, itemPrice, itemDescription);
-        this.bookId = bookId;
         this.bookIsbn = bookIsbn;
         this.bookTitle = bookTitle;
         this.bookAuthor = bookAuthor;
-    }
-    public int getBookId() {
-        return bookId;
     }
     public String getBookIsbn() {
         return bookIsbn;
